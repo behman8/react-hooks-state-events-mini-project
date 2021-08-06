@@ -6,7 +6,7 @@ function Task( {deleteTask, task} ) {
     <div className="task">
       <div className="label">{task.category}</div>
       <div className="text">{task.test}</div>
-      <button className="delete" onClick={deleteTask}>X</button>
+      <button className="delete" onClick={() => deleteTask(Task.key)}>X</button>
     </div>
   );
 }
