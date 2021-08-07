@@ -4,22 +4,21 @@ import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
 
 import { CATEGORIES, TASKS } from "../data";
-console.log("Here's the data you're working with");
-console.log({ CATEGORIES, TASKS });
 
 function App() {
-  const [task, setTask] = useState(TASKS)
+  const [tasks, setTasks] = useState(TASKS);
+  const [categories, setCategory] = useState(CATEGORIES);
 
   function handleDeleteTask(deletedTask) {
-    setTask(TASKS.filter(task => task !== deletedTask));
+    setTasks(tasks.filter(task => task !== deletedTask));
   };
-  console.log(TASKS)
+  
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter />
+      <CategoryFilter categories={categories} tasks={tasks}/>
       <NewTaskForm />
-      <TaskList tasks={TASKS} deleteTask={handleDeleteTask}/>
+      <TaskList tasks={tasks} deletedTask={handleDeleteTask}/>
     </div>
   );
 }
