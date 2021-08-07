@@ -7,16 +7,20 @@ import { CATEGORIES, TASKS } from "../data";
 
 function App() {
   const [tasks, setTasks] = useState(TASKS);
-  const [categories, setCategory] = useState(CATEGORIES);
+  const [category, setCategory] = useState("All");
 
   function handleDeleteTask(deletedTask) {
     setTasks(tasks.filter(task => task !== deletedTask));
+  };
+
+  function handleCategoryFilter() {
+    tasks.filter(task => category === "All" ? tasks : setCategory(task.category));
   };
   
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={categories} tasks={tasks}/>
+      <CategoryFilter categories={CATEGORIES} handleFilter={handleCategoryFilter} selectedCategory={category} />
       <NewTaskForm />
       <TaskList tasks={tasks} deletedTask={handleDeleteTask}/>
     </div>
