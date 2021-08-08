@@ -1,22 +1,22 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 
-function CategoryFilter( { categories, handleFilter, selectedCategory } ) {
-  console.log(selectedCategory)
+function CategoryFilter( { categories, handleFilter, selectedCategory, selectCategory } ) {
+
   return (
     <div className="categories">
       <h5>Category filters</h5>
       {categories.map((category) => 
-      selectedCategory === category ? 
+      category === selectedCategory ? 
       <button 
-        className="Selected" 
-        onClick={handleFilter} 
+        className="" 
+        onClick={() => handleFilter(category)}
         key={uuid()}>
         {category}
       </button> :
       <button 
-        className={null} 
-        onClick={handleFilter} 
+        className="selected" 
+        onClick={() => handleFilter(category)}
         key={uuid()}>
         {category}
       </button>
