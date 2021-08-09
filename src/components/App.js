@@ -14,15 +14,16 @@ function App() {
   };
 
   function handleCategoryFilter(buttonCategory) {
-    const filteredCategories = tasks.filter(task => category === "All" ? tasks : task.category === category);
+    console.log("tasks", tasks)
+    const filteredCategories = TASKS.filter(task => category === "All" ? tasks : task.category === category);
     setCategory(buttonCategory);
     setTasks(filteredCategories);
   };
-  console.log(tasks)
+
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} handleFilter={handleCategoryFilter} selectedCategory={category} selectCategory={setCategory}/>
+      <CategoryFilter categories={CATEGORIES} handleFilter={handleCategoryFilter} selectedCategory={category} />
       <NewTaskForm />
       <TaskList tasks={tasks} deletedTask={handleDeleteTask}/>
     </div>
