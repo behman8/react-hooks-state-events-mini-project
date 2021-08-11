@@ -8,14 +8,13 @@ import { CATEGORIES, TASKS } from "../data";
 function App() {
   const [tasks, setTasks] = useState(TASKS);
   const [category, setCategory] = useState("All");
-  const filteredCategories = TASKS.filter(task => category === "All" ? tasks : task.category === category);
+  const filteredCategories = tasks.filter(task => category === "All" ? tasks : task.category === category);
 
   function handleDeleteTask(deletedTask) {
     setTasks(tasks.filter(task => task !== deletedTask));
   };
 
   function handleCategoryFilter(buttonCategory) {
-    console.log("tasks", tasks)
     setCategory(buttonCategory);
     setTasks(filteredCategories);
   };
@@ -25,7 +24,7 @@ function App() {
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} handleFilter={handleCategoryFilter} selectedCategory={category} />
       <NewTaskForm />
-      <TaskList tasks={filteredCategories} deletedTask={handleDeleteTask}/>
+      <TaskList tasks={tasks} deletedTask={handleDeleteTask}/>
     </div>
   );
 }
