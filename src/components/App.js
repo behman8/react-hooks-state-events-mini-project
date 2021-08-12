@@ -16,7 +16,7 @@ function App() {
 
   function handleCategoryFilter(buttonCategory) {
     setCategory(buttonCategory);
-    setTasks(filteredCategories);
+    // setTasks(filteredCategories);
   };
 
   return (
