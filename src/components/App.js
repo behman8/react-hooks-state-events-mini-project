@@ -8,7 +8,9 @@ import { CATEGORIES, TASKS } from "../data";
 function App() {
   const [tasks, setTasks] = useState(TASKS);
   const [category, setCategory] = useState("All");
-  const filteredCategories = tasks.filter(task => category === "All" ? tasks : task.category === category);
+  const filteredCategories = tasks.filter(
+    task => 
+    category === "All" ? tasks : task.category === category);
   const [details, setDetails] = useState("");
   const [formCategory, setFormCategory] = useState("Code");
 
@@ -28,16 +30,31 @@ function App() {
     setFormCategory(event.target.value)
   };
 
-  function handleSubmit() {
-    
+  function handleSubmit(event) {
+    event.preventDefault()
+    const newTask = {
+      category: formCategory,
+      text: details
+    };
+    setTasks([...tasks, newTask])
   };
 
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} handleFilter={handleCategoryFilter} selectedCategory={category} />
-    <NewTaskForm categories={CATEGORIES} details={details} handleDetailsChange={handleDetailsChange} handleCategoryChange={handleCategoryChange}/>
-      <TaskList tasks={filteredCategories} deletedTask={handleDeleteTask}/>
+      <CategoryFilter categories={CATEGORIES} 
+      handleFilter={handleCategoryFilter} 
+      selectedCategory={category} 
+      />
+      <NewTaskForm categories={CATEGORIES} 
+      details={details} 
+      handleDetailsChange={handleDetailsChange} 
+      handleCategoryChange={handleCategoryChange} 
+      onTaskFormSubmit={handleSubmit}
+      />
+      <TaskList tasks={filteredCategories} 
+      deletedTask={handleDeleteTask}
+      />
     </div>
   );
 }
