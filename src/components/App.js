@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -11,8 +11,6 @@ function App() {
   const filteredCategories = tasks.filter(
     task => 
     category === "All" ? tasks : task.category === category);
-  const [details, setDetails] = useState("");
-  const [formCategory, setFormCategory] = useState("Code");
 
   function handleDeleteTask(deletedTask) {
     setTasks(tasks.filter(task => task !== deletedTask));
@@ -22,20 +20,7 @@ function App() {
     setCategory(buttonCategory);
   };
 
-  function handleDetailsChange(event) {
-    setDetails(event.target.value)
-  };
-
-  function handleCategoryChange(event) {
-    setFormCategory(event.target.value)
-  };
-
-  function handleSubmit(event) {
-    event.preventDefault()
-    const newTask = {
-      category: formCategory,
-      text: details
-    };
+  function handleSubmit(newTask) {
     setTasks([...tasks, newTask])
   };
 
@@ -47,9 +32,6 @@ function App() {
       selectedCategory={category} 
       />
       <NewTaskForm categories={CATEGORIES} 
-      details={details} 
-      handleDetailsChange={handleDetailsChange} 
-      handleCategoryChange={handleCategoryChange} 
       onTaskFormSubmit={handleSubmit}
       />
       <TaskList tasks={filteredCategories} 
